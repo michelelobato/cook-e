@@ -1,12 +1,15 @@
 #BBody{
-    background-color: lightblue;
+    background-color:grey;
+}
+#Bbase{
+  background-color: white;
+    padding: 5%;
+    max-width: 350px; 
+    margin: 0 auto; 
 }
 input{
-    padding: 10px;
-    padding-left: 100px;
-    margin:10px;
-}
-form{
-  margin-left:30%;
-  
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
 }
