@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     window.location.href = 'signup.html';
             
         });
+   document.getElementById('newRestaurantButton').addEventListener('click', function(e) {
+            e.preventDefault();
+                 
+                    window.location.href = 'Buissness.html';
+            
+        });
     
 });
 
