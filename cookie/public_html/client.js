@@ -26,5 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
         });
     
+<<<<<<< HEAD
 });
 
+=======
+});
+>>>>>>> 9328caa (updates)
