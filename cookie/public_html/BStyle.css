@@ -13,3 +13,11 @@ input{
   margin: 8px 0;
   box-sizing: border-box;
 }
+
+#buttn {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100%;
+}
