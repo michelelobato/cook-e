@@ -42,7 +42,7 @@ body{
             height: 5vh;
             width: 10vw;
             right: 5vw;
-            bottom: 11vh;
+            bottom: 14vh;
             
         }
         #loginButton{
@@ -50,9 +50,9 @@ body{
             height: 5vh;
             width: 10vw;
             right: 5vw;
-            bottom: 4vh;
+            bottom: 8vh;
         }
-        #createRestaurantButton{
+        #newRestaurantButton{
             position: absolute;
             height: 5vh;
             width: 10vw;
