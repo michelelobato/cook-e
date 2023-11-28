@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="loginStyle.css">
+    <script src="client.js"></script>
     <title>Signup</title>
 </head>
 <body>
 
     <div class="login">
         <h2>Signup</h2>
-        <form action="" method="post">
+        <form id = "signup_info">
             <label for="name">Full name:</label>
             <input type="text" id="name" name="name" required>
             
@@ -27,10 +28,10 @@
             <input type="email" id="email" name="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"  title="Must contain some text, then @, then more text then ., then more text">
 		
 	        <label for="phone">Phone number:</label>
-		    <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title = "Formatted as XXX-XXX-XXXX where each X must be a digit" ></div>
+		    <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title = "Formatted as XXX-XXX-XXXX where each X must be a digit" >
 		
 
-            <button type="submit">Signup</button>
+            <button onclick="createAccount();" type="submit">Signup</button>
         </form>
 
         <div class="signup-link">
