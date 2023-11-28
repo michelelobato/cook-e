@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('helpButton').addEventListener('click', function(e) {
             e.preventDefault();
                  
-                    window.location.href = 'signup.html';
+                    window.location.href = 'help.html';
             
         });
    document.getElementById('newRestaurantButton').addEventListener('click', function(e) {
