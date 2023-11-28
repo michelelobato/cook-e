@@ -26,8 +26,7 @@ var UserSchema = new mongo.Schema(  {
 
 var User = mongo.model("User",UserSchema);
 
-const mongoServerURL='mongodb://127.0.0.1:27017/pa9';
-
+const mongoServerURL='mongodb://127.0.0.1:27017/pa9mongodb+srv://admin:ffucSFRiLP8txvNX@cluster0.l2iybs5.mongodb.net/?retryWrites=true&w=majority
 mongo.connect(mongoServerURL, {useNewUrlParser:true});	
 
 mongo.connection.once('open',_ => {
