@@ -5,26 +5,37 @@ const mongo = require("mongoose");
 const express = require("express");
 const parser = require("body-parser");
 
-var ItemSchema = new mongo.Schema(  {
-	id: String,
-	title: String,
-  	description: String,
-  	image: String,
-  	price: Number,
-  	stat: String
-});
-
-var Item = mongo.model("Item",ItemSchema);
-
-
-var UserSchema = new mongo.Schema(  {
+var UserSchema = new mongoose.Schema({
+	fullname: String,
 	username: String,
-  	password: String,
-  	listings: [String],
-  	purchases: [String],
-});
+	passwordHash: String,
+	phoneNumber: [{type: String, number: String}],
+	emails: [{email: String, order: Number}]
+	
+  });
+var User = mongoose.model('User', UserSchema );
 
-var User = mongo.model("User",UserSchema);
+var restaurantSchema = new mongoose.Schema({
+	restaurantName: String,
+	adminUserNames: [String],
+	userName: [String],
+	menu: String,
+	imgNames: [{fileName: String, order: Number}],
+	hours: [{day: String, open: String, close: String}],
+	phoneNumber: [{type: String, number: String}],
+	emails: [{email: String, order: Number}],
+	address: String,
+	website: String
+});
+var Restaurant = mongoose.model('Restaurant', restaurantSchema);
+
+var homePageSchema = new mongoose.Schema({
+	content: ({
+			currentPage: Number,
+			currentRestaurants: (String)
+	}),
+	restaurants: String,
+})
 
 const mongoServerURL='mongodb://127.0.0.1:27017/pa9mongodb+srv://admin:ffucSFRiLP8txvNX@cluster0.l2iybs5.mongodb.net/?retryWrites=true&w=majority
 mongo.connect(mongoServerURL, {useNewUrlParser:true});	
