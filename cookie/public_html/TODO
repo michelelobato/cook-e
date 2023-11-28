@@ -1,4 +1,11 @@
+
+
+
 1- Set up express server
 2- connect mongo db to github
 3- password hashing
-4- 
+4- Restaurant page creation and modification
+       Here's how I think we should handle it, instead of a restaurant being essentially a user, we make restaurants their own type of schema.  And each restaurant will have a list of admins that are able to modify the page.  This would be easier to implement and safer/more secure.  The only issue i can think of is that commenting as a restaurant would be more difficult to implement.
+
+5- image storage?  How we gonna do it
+6- cookies? like the kind you use to stay logged in
