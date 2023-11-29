@@ -157,6 +157,31 @@ app.get('/account/create', (req, res) => {
   });
 });
 
+//Review Schema 
+var ReviewSchema = new mongoose.Schema({
+  username: String,
+  starRating: ,
+  reviewText: String,
+});
+
+var Review = mongoose.model('Review', ReviewSchema);
+
+app.post('/add/review', async (req, res) => {
+  try {
+    const { username, starRating, reviewText } = req.body;
+    const newReview = new Review({
+      username,
+      starRating,
+      reviewText,
+    });
+
+    await newReview.save();
+    res.status(201).json({ message: 'Review added successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 const port = 80;
 app.listen(port, () => { console.log('server has started'); });
