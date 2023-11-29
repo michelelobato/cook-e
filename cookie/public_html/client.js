@@ -1,4 +1,5 @@
 function login() {
+  
   let us = document.getElementById('login_username').value;
   let pw = document.getElementById('login_password').value;
 
@@ -16,6 +17,7 @@ function login() {
     if (text.startsWith('SUCCESS')) {
       alert(text);
       window.location.href = '/home.html';
+      localStorage.setItem("user", us); 
     } else {
       alert('failed');
     }
@@ -25,7 +27,7 @@ function login() {
 
 function createAccount() {
   // This function allows the user to create an account
-
+ 
   // Get values from input fields
   let name = document.getElementById('name').value;
   let username = document.getElementById('signup_username').value;
@@ -52,7 +54,65 @@ function createAccount() {
   });
 }
 
+function createBusiness(){
 
+
+}
+//Code to get the number of checked stars
+let stars = document.getElementsByClassName("star");
+let output = document.getElementById("output");
+
+function gfg(n) {
+    remove();
+    for (let i = 0; i < n; i++) {
+        if (n == 1) cls = "one";
+        else if (n == 2) cls = "two";
+        else if (n == 3) cls = "three";
+        else if (n == 4) cls = "four";
+        else if (n == 5) cls = "five";
+        stars[i].className = "star " + cls;
+    }
+    output.innerText = "Rating is: " + n + "/5";
+    localStorage.setItem("number", n);
+}
+
+function remove() {
+    let i = 0;
+    while (i < 5) {
+        stars[i].className = "star";
+        i++;
+    }
+}
+
+
+//Code to post a review
+function postReview() {
+    let starRating = localStorage.getItem("number");
+    let reviewText = document.getElementById('freeform').value;
+    let username = localStorage.getItem("user"); //change (used for testing purposes)
+
+    let info = {
+        starRating: starRating,
+        reviewText: reviewText,
+        username: username,
+    };
+
+    fetch('/add/review', {
+        method: 'POST',
+        body: JSON.stringify(info),
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((text) => {
+        console.log(text);
+        // window.location.href = 'home.html';
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
 
 
 /*
@@ -60,10 +120,12 @@ TODO Function
 add new users
 */
 
+
 /*
 TODO Function
 Login users
 */
+
 
 /*
 TODO Function
@@ -85,34 +147,3 @@ TODO Function
 */
 
 
-
-
-document.addEventListener('DOMContentLoaded', function() {
-   
-        //press login button
-        document.getElementById('loginButton').addEventListener('click', function(e) {
-            e.preventDefault();
-                    
-                    window.location.href = 'login.html';
-            
-        });
-        document.getElementById('signUpButton').addEventListener('click', function(e) {
-            e.preventDefault();
-                 
-                    window.location.href = 'signup.html';
-            
-        });
-        document.getElementById('helpButton').addEventListener('click', function(e) {
-            e.preventDefault();
-                 
-                    window.location.href = 'help.html';
-            
-        });
-   document.getElementById('newRestaurantButton').addEventListener('click', function(e) {
-            e.preventDefault();
-                 
-                    window.location.href = 'Buissness.html';
-            
-        });
-
-});
