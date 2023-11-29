@@ -66,7 +66,7 @@ function createBusiness(){
   document.getElementById('newRestaurantButton').addEventListener('click', function(e) {
     e.preventDefault();
          
-            window.location.href = 'Buissness.html';
+            window.location.href = 'login.html';
     
 });
 
