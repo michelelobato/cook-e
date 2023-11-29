@@ -37,7 +37,11 @@ var homePageSchema = new mongoose.Schema({
 	restaurants: String,
 })
 
-const mongoServerURL='mongodb://127.0.0.1:27017/pa9mongodb+srv://admin:ffucSFRiLP8txvNX@cluster0.l2iybs5.mongodb.net/?retryWrites=true&w=majority
+const mongoServerURL= 'mongodb+srv://doadmin:2M8vUa915Vs3u601@cook-e-database-506eb0f7.mongo.ondigitalocean.com/admin?tls=true&authSource=admin';
+
+
+
+
 mongo.connect(mongoServerURL, {useNewUrlParser:true});	
 
 mongo.connection.once('open',_ => {
