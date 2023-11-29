@@ -160,7 +160,7 @@ app.get('/account/create', (req, res) => {
 //Review Schema 
 var ReviewSchema = new mongoose.Schema({
   username: String,
-  starRating: ,
+  starRating: Number,
   reviewText: String,
 });
 
