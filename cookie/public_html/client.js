@@ -1,4 +1,9 @@
 function login() {
+  document.getElementById('loginButton').addEventListener('click', function(e) {
+    e.preventDefault(); 
+            window.location.href = 'login.html';
+    
+});
   let us = document.getElementById('login_username').value;
   let pw = document.getElementById('login_password').value;
 
@@ -25,7 +30,12 @@ function login() {
 
 function createAccount() {
   // This function allows the user to create an account
-
+  document.getElementById('signUpButton').addEventListener('click', function(e) {
+    e.preventDefault();
+         
+            window.location.href = 'signup.html';
+    
+});
   // Get values from input fields
   let name = document.getElementById('name').value;
   let username = document.getElementById('signup_username').value;
@@ -52,7 +62,15 @@ function createAccount() {
   });
 }
 
+function createBusiness(){
+  document.getElementById('newRestaurantButton').addEventListener('click', function(e) {
+    e.preventDefault();
+         
+            window.location.href = 'Buissness.html';
+    
+});
 
+}
 
 
 /*
@@ -60,10 +78,12 @@ TODO Function
 add new users
 */
 
+
 /*
 TODO Function
 Login users
 */
+
 
 /*
 TODO Function
@@ -85,34 +105,3 @@ TODO Function
 */
 
 
-
-
-document.addEventListener('DOMContentLoaded', function() {
-   
-        //press login button
-        document.getElementById('loginButton').addEventListener('click', function(e) {
-            e.preventDefault();
-                    
-                    window.location.href = 'login.html';
-            
-        });
-        document.getElementById('signUpButton').addEventListener('click', function(e) {
-            e.preventDefault();
-                 
-                    window.location.href = 'signup.html';
-            
-        });
-        document.getElementById('helpButton').addEventListener('click', function(e) {
-            e.preventDefault();
-                 
-                    window.location.href = 'help.html';
-            
-        });
-   document.getElementById('newRestaurantButton').addEventListener('click', function(e) {
-            e.preventDefault();
-                 
-                    window.location.href = 'Buissness.html';
-            
-        });
-
-});
