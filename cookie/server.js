@@ -9,7 +9,7 @@ cm.sessions.startCleanup();
 
 
 const db  = mongoose.connection;
-const mongoDBURL = 'mongodb+srv://jasadelberg:HKjad473@cluster0.qr9yuh3.mongodb.net/';
+const mongoDBURL = 'mongodb+srv://doadmin:8T176LleHu5042fE@cook-e-database-506eb0f7.mongo.ondigitalocean.com/admin?tls=true&authSource=admin';
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
 db.on('error', () => { console.log('MongoDB connection error:') });
 
@@ -37,7 +37,6 @@ function addSession(username) {
 }
 
 function removeSessions() {
-  console.log('removeSession initieated');
   let now = Date.now();
   let usernames = Object.keys(sessions);
   for (let i = 0; i < usernames.length; i++) {
