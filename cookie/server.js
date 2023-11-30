@@ -116,6 +116,7 @@ app.post('/account/login/', (req, res) => {
 
 
 app.get('/account/create', (req, res) => {
+  console.log("acount creation initiated")
   let username = req.query.username;
   let password = req.query.password;
   let name = req.query.name;
