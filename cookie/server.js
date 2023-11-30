@@ -29,6 +29,7 @@ var User = mongoose.model('User', UserSchema);
 
 let sessions = {};
 function addSession(username) {
+  console.log('addsession initiated');
   let sid = Math.floor(Math.random() * 1000000000);
   let now = Date.now();
   sessions[username] = {id: sid, time: now};
@@ -36,6 +37,7 @@ function addSession(username) {
 }
 
 function removeSessions() {
+  console.log('removeSession initieated');
   let now = Date.now();
   let usernames = Object.keys(sessions);
   for (let i = 0; i < usernames.length; i++) {
@@ -58,6 +60,7 @@ app.use(express.json())
 //app.use(parser.text({type: '*/*'}));
 
 function authenticate(req, res, next) {
+  console.log('authenticate function');
   let c = req.cookies;
   if (c && c.login) {
     let result = cm.sessions.doesUserHaveSession(c.login.username, c.login.sid);
