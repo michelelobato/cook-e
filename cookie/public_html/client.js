@@ -29,6 +29,8 @@ function createAccount() {
   // This function allows the user to create an account
  
   // Get values from input fields
+
+  console.log("create acount works");
   let name = document.getElementById('name').value;
   let username = document.getElementById('signup_username').value;
   let password = document.getElementById('signup_password').value;
