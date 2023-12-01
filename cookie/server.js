@@ -25,6 +25,19 @@ db.on('error', () => { console.log('MongoDB connection error:') });
 });
 var User = mongoose.model('User', UserSchema);
 
+var BusinessSchema = new mongoose.Schema({
+  name: String,
+  username: String,
+  password: String,
+  menu: String,
+  image: String,
+  phone: String,
+  email: String,
+  address: String,
+  website: String, 
+  logo: String,
+});
+var User = mongoose.model('Business', BusinessSchema);
 
 
 let sessions = {};
@@ -185,6 +198,35 @@ app.post('/add/review', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
+app.post('/create/business', async (req, res) => {
+  const { Bname, username, password, menu,
+  image, phone, email, address, website, logo} = req.body;
+
+  // Check if a user with the same username already exists
+  const existingBusiness = await BusinessSchema.findOne({ Bname });
+  const existingUser = await UserSchema.findOne({ username });
+if(!existingUser){
+  res.status(400).json({ error: 'username account does not exist' });
+  
+}else{
+  if (existingBusiness) {
+    res.status(400).json({ error: 'business already exists' });
+  } else {
+    try {
+      const newBusiness = await BusinessSchema.create({ Bname, username, password, menu,
+        image, phone, email, address, website, logo });
+      res.status(201).json(BusinessSchema);
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to create business' });
+    }
+  }
+}
+});
+
+
+
 
 const port = 80;
 app.listen(port, () => { console.log('server has started'); });
