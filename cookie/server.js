@@ -3,9 +3,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const crypto = require('crypto');
-const cm = require('./customsessions');
 
-cm.sessions.startCleanup();
 
 
 const db  = mongoose.connection;
@@ -37,12 +35,14 @@ var BusinessSchema = new mongoose.Schema({
   website: String, 
   logo: String,
 });
-var User = mongoose.model('Business', BusinessSchema);
+/**var User = mongoose.model('Business', BusinessSchema); */
+/**changed this since it is changing User instead of business*/
+var Business = mongoose.model('Business', BusinessSchema); 
+
 
 
 let sessions = {};
 function addSession(username) {
-  console.log('addsession initiated');
   let sid = Math.floor(Math.random() * 1000000000);
   let now = Date.now();
   sessions[username] = {id: sid, time: now};
@@ -54,7 +54,8 @@ function removeSessions() {
   let usernames = Object.keys(sessions);
   for (let i = 0; i < usernames.length; i++) {
     let last = sessions[usernames[i]].time;
-    if (last + 300000 < now) {
+    //if (last + 120000 < now) {
+    if (last + 20000 < now) {
       delete sessions[usernames[i]];
     }
   }
@@ -65,112 +66,98 @@ setInterval(removeSessions, 2000);
 
 const app = express();
 app.use(cookieParser());    
-app.use('/app/*', authenticate);
-app.use(express.static('public_html'))
-//app.get('/', (req, res) => { res.redirect('/home.html'); });
+//app.get('/', (req, res) => { res.redirect('/app/index.html'); });
 app.use(express.json())
 //app.use(parser.text({type: '*/*'}));
 
 function authenticate(req, res, next) {
-  console.log('authenticate function');
   let c = req.cookies;
-  if (c && c.login) {
-    let result = cm.sessions.doesUserHaveSession(c.login.username, c.login.sid);
-    if (result) {
+  console.log('auth request:');
+  console.log(req.cookies);
+  if (c != undefined) {
+    if (sessions[c.login.username] != undefined && 
+      sessions[c.login.username].id == c.login.sessionID) {
       next();
-      return;
+    } else {
+      res.redirect('index.html');
     }
+  }  else {
+    res.redirect('index.html');
   }
-  res.redirect('/home.html');
 }
 
-app.use('*', (req, res, next) => {
-  let c = req.cookies;
-  if (c && c.login) {
-    if (cm.sessions.doesUserHaveSession(c.login.username, c.login.sid)) {
-      cm.sessions.addOrUpdateSession(c.login.username);
-    }
-  }
+app.use('/app/*', authenticate);
+app.get('/app/*', (req, res, next) => { 
+  console.log('another');
   next();
 });
 
 
-app.post('/account/login/', (req, res) => {
-  let u = req.body.username;
-  let p = req.body.password;
-  console.log(u);
-  console.log(p);
-  let p1 = User.find({username:u}).exec();
-  p1.then( (results) => {
-    console.log(results);
-    for(let i = 0; i < results.length; i++) {
-
-      let existingSalt = results[i].salt;
-      let toHash = req.body.password + existingSalt;
-      var hash = crypto.createHash('sha3-256');
-      let data = hash.update(toHash, 'utf-8');
-      let newHash = data.digest('hex');
+app.post('/account/login', (req, res) => { 
+  console.log(sessions);
+  let u = req.body;
+  let p1 = User.find({username: u.username}).exec();
+  p1.then( (results) => { 
+    if (results.length == 0) {
+      res.end('Coult not find account');
+    } else {
+      let currentUser = results[0];
+      let toHash = u.password + currentUser.salt;
+      let h = crypto.createHash('sha3-256');
+      let data = h.update(toHash, 'utf-8');
+      let result = data.digest('hex');
       
-      if (newHash == results[i].hash) {
-        let id = cm.sessions.addOrUpdateSession(u);
-        res.cookie("login", {username: u, sid: id}, {maxAge: 60000*60*24});
-        res.end('SUCCESS ' + JSON.stringify(results));
-        return;
-      } 
-    } 
-    res.end('login failed');
-  });
-  p1.catch( (error) => {
-    res.end('login failed');
+      console.log(toHash);
+      console.log('HASH WE JUST MADE:');
+      console.log(result);
+      console.log('THE ORIGINAL HASH:');
+      console.log(currentUser.hash);
+
+      if (result == currentUser.hash) {
+          let sid = addSession(u.username);  
+          res.cookie("login", 
+            {username: u.username, sessionID: sid}, 
+            {maxAge: 60000 * 2 });
+          res.end('SUCCESS');
+      } else {
+          res.end('FAILED TO LOG IN');
+      }
+    }
   });
 });
 
+app.post('/account/create', (req, res) => {
+  const u = req.body;
 
+  User.find({ username: u.username }).exec()
+    .then((results) => {
+      if (results.length === 0) {
+        const newSalt = '' + Math.floor(Math.random() * 10000000000);
+        const toHash = u.password + newSalt;
+        const h = crypto.createHash('sha3-256');
+        const data = h.update(toHash, 'utf-8');
+        const result = data.digest('hex');
 
-app.get('/account/create', (req, res) => {
-  console.log("acount creation initiated")
-  let username = req.query.username;
-  let password = req.query.password;
-  let name = req.query.name;
-  let phone = req.query.phone;
-  let email = req.query.email;
-
-  let p1 = User.find({ username: username }).exec();
-
-  p1.then((results) => {
-    if (results.length > 0) {
-      res.end('That username is already taken.');
-    } else {
-      let newSalt = Math.floor(Math.random() * 1000000);
-      let toHash = password + newSalt;
-      var hash = crypto.createHash('sha3-256');
-      let data = hash.update(toHash, 'utf-8');
-      let newHash = data.digest('hex');
-
-      var newUser = new User({
-        name: name,
-        username: username,
-        salt: newSalt,
-        hash: newHash,
-        email: email,
-        phone: phone,
-      });
-
-      newUser
-        .save()
-        .then((doc) => {
-          res.end('Created new account!');
-        })
-        .catch((err) => {
-          console.log(err);
-          res.end('Failed to create new account.');
+        const newUser = new User({
+          username: u.username,
+          hash: result,
+          salt: newSalt,
+          name: u.name,    // Include additional fields
+          email: u.email,  // Include additional fields
+          phone: u.phone   // Include additional fields
         });
-    }
-  });
 
-  p1.catch((error) => {
-    res.end('Failed to create new account.');
-  });
+        newUser.save()
+          .then(() => {
+            res.end('USER CREATED');
+          })
+          .catch(() => {
+            res.end('DATABASE SAVE ISSUE');
+          });
+      } else {
+        res.end('USERNAME ALREADY TAKEN');
+      }
+    });
 });
 
 //Review Schema 
