@@ -6,64 +6,67 @@ body{
 #banner{
     width: 100vw;
     height: 20vh;
-    border: red dotted;
-    margin: 0vw;
+    overflow: hidden;
+    white-space: nowrap;
+    background-color: rgb(198, 134, 69);
 
     #logo{
-        height: 20vh;
-        width: 20vh;
-        border: red dotted;
+        
         display: inline-block;
+        height: 150px;
+        width: 150px;
+
     }
 
     #companyName{
+    
         margin-left: 2vw;
-        font-size: 15vh;
+        font-size: 10vh;
         display: inline-block;
         vertical-align: top;
-    }
-    #homeButtons{
-        height: 20vh;
-        width: 30vw;
-        display: inline-block;
-        border: red dotted;
-        vertical-align: top;
-        float: right;
-        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+        font-family: Inter,sans-serif;
 
+    }
+   
         #helpButton{
-            height: 15vh;
-            width: 10vw;
-            margin: 3vh;
-            font-size: 7vh
+            position: fixed;
+            bottom: 3%;
+            right: 5%;
+            overflow: hidden;
+            white-space: nowrap;
         }
         #signUpButton{
             position: absolute;
-            height: 5vh;
-            width: 10vw;
-            right: 5vw;
-            bottom: 11vh;
+            display:block;
+            top: 3%;
+            right: 20%;
+            overflow: hidden;
+            white-space: nowrap;
             
         }
         #loginButton{
             position: absolute;
-            height: 5vh;
-            width: 10vw;
-            right: 5vw;
-            bottom: 4vh;
+            display:block;
+            right: 10%;
+            top: 3%;
+            overflow: hidden;
+            white-space: nowrap;
         }
-        #createRestaurantButton{
+        #newRestaurantButton{
             position: absolute;
-            height: 5vh;
-            width: 10vw;
-            right: 5vw;
-            bottom: 2vh;
+            display:block;
+            top: 10%;
+            right: 10%;
+            overflow: hidden;
+            white-space: nowrap;
         }
         
 
         
     }
-}
+
 #restaurantContainer{
     width: 90vw;
     height: 70vh;
@@ -73,3 +76,31 @@ body{
     
     border: black solid;
 }
+
+
+button {
+
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-family: Inter,sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  height: 30px;
+  align-content: center;
+  padding:  17px;
+  text-align: center;
+  touch-action: manipulation;
+
+}
+
+button:hover {
+    border-color: rgb(0, 200, 255);
+    color: rgb(0, 200, 255);
+    fill:rgb(0, 200, 255);
+  }
