@@ -144,15 +144,15 @@ function createBusiness(){
        menu: menu, image: image, phone: phone, email: email, address: address,
       website: website, logo: logo, restaurantTag: restaurantTag,dishesList: dishesList, hours: hours };
         
-  fetch('/create/business', {
+ let p = fetch('/create/business', {
       method: 'POST',
       body: JSON.stringify(Bdata),
       headers: { "Content-Type": "application/json" }
   })
-  .then(response => {
+  p.then(response => {
       return response.text();
   })
-  .then(text => {
+  p.then(text => {
       if (text.startsWith('SUCCESS')) {
           alert('creation successful');
           window.location.href = '/index.html';
@@ -160,7 +160,7 @@ function createBusiness(){
           alert('login failed');
       }
   })
-  .catch(error => {
+  p.catch(error => {
       console.error('Error:', error);
       alert('An error occurred during login');
   });
