@@ -180,10 +180,13 @@ function createBusiness(){
   let address = document.getElementById('BAddress').value;
   let website = document.getElementById('BWebsite').value;
   let logo = document.getElementById('BLogo').value;
+  let restaurantTag = document.getElementById('restaurantTagline').value;
+  let dishesList = document.getElementById('dishesList').value;
+  let hours = document.getElementById('openingHours').value;
 
   let Bdata = { BName: name, username: username, password: password,
        menu: menu, image: image, phone: phone, email: email, address: address,
-      website: website, logo: logo };
+      website: website, logo: logo, restaurantTag: restaurantTag,dishesList: dishesList, hours: hours };
         
   fetch('/create/business', {
       method: 'POST',
