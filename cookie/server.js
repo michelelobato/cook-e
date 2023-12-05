@@ -39,6 +39,9 @@ var BusinessSchema = new mongoose.Schema({
   address: String,
   website: String, 
   logo: String,
+  restaurantTagline: String,
+  dishesList: String,
+  openingHours: String
 });
 /**var User = mongoose.model('Business', BusinessSchema); */
 /**changed this since it is changing User instead of business*/
@@ -221,7 +224,7 @@ if(!existingUser){
   } else {
     try {
       const newBusiness = await BusinessSchema.create({ Bname, username, password, menu,
-        image, phone, email, address, website, logo });
+        image, phone, email, address, website, logo ,restaurantTagline, dishesList, openingHours});
       res.status(201).json(BusinessSchema);
     } catch (err) {
       res.status(500).json({ error: 'Failed to create business' });
