@@ -21,6 +21,7 @@ async function  getRestaurants(){
 }
 
 function login() {
+//This function logs in the user. Checks if the account is in the database
   let us = document.getElementById('login_username').value;
   let pw = document.getElementById('login_password').value;
   let data = {username: us, password: pw};
@@ -34,8 +35,9 @@ function login() {
   }).then((text) => {
     console.log(text);
     if (text.startsWith('SUCCESS')) {
+      localStorage.setItem('user', us);
       alert(text);
-      window.location.href = 'index.html';
+      window.location.href = 'Buissness.html';
     } else {
       alert('failed');
     }
@@ -43,6 +45,8 @@ function login() {
 }
 
 function createAccount() {
+// This functions creates an account for the user.
+// Sends name, username, password, email and phone number to database
   let name = document.getElementById('name').value;
   let us = document.getElementById('signup_username').value;
   let pw = document.getElementById('signup_password').value;
@@ -70,10 +74,13 @@ function createAccount() {
 }
 
 //Code to get the number of checked stars
+// source: https://www.geeksforgeeks.org/star-rating-using-html-css-and-javascript/
 let stars = document.getElementsByClassName("star");
 let output = document.getElementById("output");
 
 function gfg(n) {
+//calculates the number of selected star for the rating
+// source: https://www.geeksforgeeks.org/star-rating-using-html-css-and-javascript/
     remove();
     for (let i = 0; i < n; i++) {
         if (n == 1) cls = "one";
@@ -88,6 +95,7 @@ function gfg(n) {
 }
 
 function remove() {
+//source: https://www.geeksforgeeks.org/star-rating-using-html-css-and-javascript/
     let i = 0;
     while (i < 5) {
         stars[i].className = "star";
@@ -96,16 +104,23 @@ function remove() {
 }
 
 
-//Code to post a review
 function postReview() {
-    let starRating = localStorage.getItem("number");
+//code to post a review
+    let business = localStorage.getItem('business');
+    let starRating = localStorage.getItem('number');
     let reviewText = document.getElementById('freeform').value;
-    let username = localStorage.getItem("user"); //change (used for testing purposes)
+    let username = localStorage.getItem('user'); 
+    
+    //Calculates the timestamp for the review
+    let currentDate = new Date();
+    let formattedDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
 
     let info = {
+        business: business,
         starRating: starRating,
         reviewText: reviewText,
         username: username,
+        createdAt: formattedDate, // Includes the formatted date and time
     };
 
     fetch('/add/review', {
@@ -118,7 +133,7 @@ function postReview() {
     })
     .then((text) => {
         console.log(text);
-        // window.location.href = 'home.html';
+        getAllReviews(); //Updates reviews after posting a new one so the new one is on top
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -192,8 +207,79 @@ function createBusiness(){
   });
 }
 
+localStorage.setItem('business', 'test'); //CHANGE< USING FOR TESTING PURPOSES
+function getAllReviews() {
+    let business = localStorage.getItem('business');
 
+    fetch(`/get/reviews/${business}`, {  // search specific business name
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((reviews) => {
+        const postRating = document.getElementById('postRating');
+        postRating.innerHTML = ''; // Clear existing reviews
+        // puts newest reviews on top
+        reviews.reverse();
 
+        // Loop through reviews
+        reviews.forEach((review) => {
+            const reviewDiv = document.createElement('div');
+            const starsDiv = document.createElement('div');
+            starsDiv.className = 'stars';
+
+            // Gets the review's starRating
+            for (let i = 0; i < review.starRating; i++) {
+                const starSpan = document.createElement('span');
+                starSpan.className = 'yellow-star';
+                starSpan.innerHTML = '★';
+                starsDiv.appendChild(starSpan);
+            }
+            const detailsDiv = document.createElement('div');
+            const usernameDisplay = review.username ? `<strong>${review.username}</strong>` : 'Anonymous';
+            
+            detailsDiv.innerHTML = `<p><strong>${usernameDisplay}</strong> - ${review.starRating}/5<br>${review.reviewText}<br>${formatDate(review.createdAt)}</p>`;
+            reviewDiv.appendChild(starsDiv);
+            reviewDiv.appendChild(detailsDiv);
+            postRating.appendChild(reviewDiv);
+        });
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function formatDate(dateString) {
+// gets the formatted date
+    const options = {
+        year: 'numeric',
+        month: 'long', 
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true, 
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+}
+
+window.onload = function() {
+    getAllReviews();
+};
+
+function changeRestaurant() {
+//changes the business name on the review page
+  var restaurantTitleElement = 'CHANGE';
+  if (restaurantTitleElement) {
+    restaurantTitleElement.innerHTML = "Reviews for " + generateRandomRestaurantName();
+  } else {
+    console.error("Element with id 'restaurantTitle' not found.");
+  }
+}
+
+window.onload = changeRestaurant;
 
 
 /*
