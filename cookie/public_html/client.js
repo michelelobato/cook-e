@@ -155,7 +155,7 @@ function createBusiness(){
   .then(text => {
       if (text.startsWith('SUCCESS')) {
           alert('creation successful');
-          window.location.href = '/home.html';
+          window.location.href = '/index.html';
       } else {
           alert('login failed');
       }
