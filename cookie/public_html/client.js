@@ -285,20 +285,6 @@ function createHomePage(){
 };
 
 
-async function  getRestaurants(){
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://137.184.38.238:80/businesses/");
-  xhr.send();
-  xhr.responseType = "json";
-  xhr.onload = () => {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      const data = xhr.response;
-      return data;
-    } else {
-      console.log(`Error: ${xhr.status}`);
-    }
-  };
-}
 
 
 
