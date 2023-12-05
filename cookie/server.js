@@ -210,12 +210,12 @@ app.post('/add/review', async (req, res) => {
 app.post('/create/business', async (req, res) => {
 //creates a business
   const { Bname, username, password, menu,
-  image, phone, email, address, website, logo} = req.body;
+  image, phone, email, address, website, logo, RestaurantTagline, dishesList, openingHours} = req.body;
 
   // Check if a user with the same username already exists
   const existingBusiness = await BusinessSchema.findOne({ Bname });
   const existingUser = await UserSchema.findOne({ username });
-if(!existingUser){
+if(existingUser){
   res.status(400).json({ error: 'username account does not exist' });
   
 }else{
