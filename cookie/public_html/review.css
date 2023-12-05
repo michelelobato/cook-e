@@ -1,51 +1,62 @@
-/* style.css */
+/**Group Members: Jasmine Adelberg, Dylan Crites, Michele Lobato, Sameeka Maroli
+    CSC 337: Final Project
+    This document is the css for the create and view reviews page. Splits the screen
+    so one side has create a review and the other you can view all reviews for that
+    place.**/
+    
+body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top:100px;
+ 
+}
 
-* { 
-	margin: 0; 
-	padding: 0; 
-	box-sizing: border-box; 
-} 
 
-body { 
-	min-height: 50vh; 
-	display: flex; 
-	align-items: center; 
-	text-align: center; 
-	justify-content: center; 
-	background: hsl(137, 46%, 24%); 
-	font-family: "Poppins", sans-serif; 
-} 
+#rating {
+    width: 40%;
+}
 
-.card { 
-	max-width: 33rem; 
-	background: #fff; 
-	margin: 0 1rem; 
-	padding: 1rem; 
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
-	width: 100%; 
-	border-radius: 0.5rem; 
-} 
+#allRating {
+    width: 50%;
+    
+}
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+}
 
-.star { 
-	font-size: 10vh; 
-} 
+.star {
+    font-size: 24px;
+    color: #ffd700;
+    cursor: pointer;
+    margin-right: 5px;
+}
 
-.one { 
-	color: rgb(255, 0, 0); 
-} 
+.yellow-star {
+    font-size: 18px;
+    margin-right: 5px;
+}
 
-.two { 
-	color: rgb(255, 106, 0); 
-} 
+.stars {
+    color: #ffd700;
+    display: flex;
+}
 
-.three { 
-	color: rgb(251, 255, 120); 
-} 
+.star:hover {
+    color: #ffcc00;
+}
 
-.four { 
-	color: rgb(255, 255, 0); 
-} 
+#output {
+    text-align: center;
+    
+}
 
-.five { 
-	color: rgb(24, 159, 14); 
+#freeform {
+    width: 100%;
+}
+
+#buttn {
+    margin-top: 10px;
 }

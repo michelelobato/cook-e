@@ -1,12 +1,13 @@
+<!--Group Members: Jasmine Adelberg, Dylan Crites, Michele Lobato, Sameeka Maroli
+    CSC 337: Final Project
+    This document is the html for the create and view reviews page. Users can create a
+    review and rating of the selected resturant and also read other reviews. -->
 <!DOCTYPE html> 
 <html> 
 
 <head> 
 	<meta charset="utf-8" /> 
 	<title>Rating</title> 
-	<meta name="viewport"
-		content="width=device-width, 
-				initial-scale=1" /> 
 	<link rel="stylesheet"
 		href="review.css" /> 
 	
@@ -14,6 +15,8 @@
 
 <body> 
 <div id ="rating">
+<a href="index.html" id="homeButton"><button>Go Back to Home</button></a>
+
  <form id ="RatingCreate">
 	<div class="card"> 
 		<br /> 
@@ -42,9 +45,16 @@
 </textarea><br><br>
 		<button onclick= "postReview();" type = "submit" id = "buttn">Post Review</button><br>
 	</form>
-	</div> 
+	</div>
+	</div>
+	<div id = "allRating"> 
+	<h1 id="restaurantTitle">Reviews for Restaurant</h1>
+	<p id="postRating"></p>
+	
 	</div>
 	<script src="client.js"></script> 
 </body> 
 
 </html>
+
+

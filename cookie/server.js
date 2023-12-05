@@ -1,17 +1,19 @@
+//Group Members: Jasmine Adelberg, Dylan Crites, Michele Lobato, Sameeka Maroli
+//CSC 337: Final Project
+//This document is the server.js for our cook-e website
+
 const mongoose = require('mongoose');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const crypto = require('crypto');
 
-
-
 const db  = mongoose.connection;
 const mongoDBURL = 'mongodb+srv://jasadelberg:HKjad473@cluster0.qr9yuh3.mongodb.net/';
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
 db.on('error', () => { console.log('MongoDB connection error:') });
 
-
+//User schema
  var UserSchema = new mongoose.Schema({
     name: String,
     username: String,
@@ -23,6 +25,7 @@ db.on('error', () => { console.log('MongoDB connection error:') });
 });
 var User = mongoose.model('User', UserSchema);
 
+//Business schema
 var BusinessSchema = new mongoose.Schema({
   name: String,
   username: String,
@@ -40,7 +43,7 @@ var BusinessSchema = new mongoose.Schema({
 var Business = mongoose.model('Business', BusinessSchema); 
 
 
-
+//Source from class slides
 let sessions = {};
 function addSession(username) {
   let sid = Math.floor(Math.random() * 1000000000);
@@ -49,13 +52,14 @@ function addSession(username) {
   return sid;
 }
 
+//Source from class slides
 function removeSessions() {
   let now = Date.now();
   let usernames = Object.keys(sessions);
   for (let i = 0; i < usernames.length; i++) {
     let last = sessions[usernames[i]].time;
-    //if (last + 120000 < now) {
-    if (last + 20000 < now) {
+    // Keep users logged in for five minutes (300,000 milliseconds)
+    if (last + 300000 < now) {
       delete sessions[usernames[i]];
     }
   }
@@ -70,6 +74,7 @@ app.use(cookieParser());
 app.use(express.json())
 //app.use(parser.text({type: '*/*'}));
 
+//Source from class slides
 function authenticate(req, res, next) {
   let c = req.cookies;
   console.log('auth request:');
@@ -86,6 +91,7 @@ function authenticate(req, res, next) {
   }
 }
 
+//Source from class slides
 app.use('/app/*', authenticate);
 app.get('/app/*', (req, res, next) => { 
   console.log('another');
@@ -94,12 +100,14 @@ app.get('/app/*', (req, res, next) => {
 
 
 app.post('/account/login', (req, res) => { 
+//Logs in a user using salt and hash instead of password
+//Source from class slides
   console.log(sessions);
   let u = req.body;
   let p1 = User.find({username: u.username}).exec();
   p1.then( (results) => { 
     if (results.length == 0) {
-      res.end('Coult not find account');
+      res.end('Could not find account');
     } else {
       let currentUser = results[0];
       let toHash = u.password + currentUser.salt;
@@ -127,11 +135,13 @@ app.post('/account/login', (req, res) => {
 });
 
 app.post('/account/create', (req, res) => {
+//creates an account for the user
   const u = req.body;
 
   User.find({ username: u.username }).exec()
     .then((results) => {
       if (results.length === 0) {
+      //Salting and Hashing: Source from class slides
         const newSalt = '' + Math.floor(Math.random() * 10000000000);
         const toHash = u.password + newSalt;
         const h = crypto.createHash('sha3-256');
@@ -142,9 +152,9 @@ app.post('/account/create', (req, res) => {
           username: u.username,
           hash: result,
           salt: newSalt,
-          name: u.name,    // Include additional fields
-          email: u.email,  // Include additional fields
-          phone: u.phone   // Include additional fields
+          name: u.name,    
+          email: u.email,  
+          phone: u.phone
         });
 
         newUser.save()
@@ -162,20 +172,24 @@ app.post('/account/create', (req, res) => {
 
 //Review Schema 
 var ReviewSchema = new mongoose.Schema({
+  business: String,
   username: String,
   starRating: Number,
   reviewText: String,
+  createdAt: { type: Date, default: Date.now },
 });
-
 var Review = mongoose.model('Review', ReviewSchema);
 
 app.post('/add/review', async (req, res) => {
+//adds a review that the user creates
   try {
-    const { username, starRating, reviewText } = req.body;
+    const { business, username, starRating, reviewText, createdAt } = req.body;
     const newReview = new Review({
+      business,
       username,
       starRating,
       reviewText,
+      createdAt,
     });
 
     await newReview.save();
@@ -188,6 +202,7 @@ app.post('/add/review', async (req, res) => {
 
 
 app.post('/create/business', async (req, res) => {
+//creates a business
   const { Bname, username, password, menu,
   image, phone, email, address, website, logo} = req.body;
 
@@ -210,6 +225,19 @@ if(!existingUser){
     }
   }
 }
+});
+
+
+app.get('/get/reviews/:business', async (req, res) => {
+//gets all the business's reviews
+    try {
+        const business = req.params.business;
+        const reviews = await Review.find({ business: business }).exec();
+        res.status(200).json(reviews);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 
