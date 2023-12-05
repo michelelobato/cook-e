@@ -243,9 +243,16 @@ app.get('/get/reviews/:business', async (req, res) => {
     }
 });
 
-app.get('/businesses/', async(req, res) => {
-  res.send(Business.find());
-})
+app.get('/get/businesses/', async (req, res) => {
+  try {
+    const businessList = await Business.find().exec();
+    res.status(200).json(businessList);
+  }catch(error) {
+    console.error(error);
+    res.status(500).json({error: 'Unable to find restaurants'});
+  }
+  
+});
 
 
 

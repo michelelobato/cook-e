@@ -1,24 +1,6 @@
-function onLoad(){
-  let container = document.getElementById('restaurantContainer');
-  let restaurantList = getRestaurants();
-  console.log(restaurantList);
 
-}
 
-async function  getRestaurants(){
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://137.184.38.238:80/businesses/");
-  xhr.send();
-  xhr.responseType = "json";
-  xhr.onload = () => {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      const data = xhr.response;
-      return data;
-    } else {
-      console.log(`Error: ${xhr.status}`);
-    }
-  };
-}
+
 
 function login() {
 //This function logs in the user. Checks if the account is in the database
@@ -140,10 +122,6 @@ function postReview() {
     });
 }
 
-function createHomepage(){
-  
-
-}
 
 
 function createBusiness(){
@@ -208,6 +186,7 @@ function createBusiness(){
 }
 
 localStorage.setItem('business', 'test'); //CHANGE< USING FOR TESTING PURPOSES
+
 function getAllReviews() {
     let business = localStorage.getItem('business');
 
@@ -282,35 +261,42 @@ function changeRestaurant() {
 window.onload = changeRestaurant;
 
 
-/*
-TODO Function
-add new users
-*/
+window.onload = function(){
+  createHomePage();
+};
+
+function createHomePage(){
+  let container = document.getElementById('restaurantContainer');
+  let restaurantList = getRestaurants();
+  
+  fetch('/get/businesses/', {
+    method: 'GET',
+    headers: {'Content-Type': 'application/json'},
+  })
+  .then((response)=>{
+    return response.json();
+  })
+  .then((businessList) =>{
+    console.log(businessList);
+  })
+};
 
 
-/*
-TODO Function
-Login users
-*/
+async function  getRestaurants(){
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "http://137.184.38.238:80/businesses/");
+  xhr.send();
+  xhr.responseType = "json";
+  xhr.onload = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      const data = xhr.response;
+      return data;
+    } else {
+      console.log(`Error: ${xhr.status}`);
+    }
+  };
+}
 
 
-/*
-TODO Function
-create restaurant 
-*/
-
-/*
-TODO Function
-build hompage using homepage schema
-*/
-
-/*
-TODO Function
-
-*/
-/*
-TODO Function
-
-*/
 
 
