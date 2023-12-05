@@ -6,7 +6,7 @@ const crypto = require('crypto');
 
 
 
-constcconst db  = mongoose.connection;
+const db  = mongoose.connection;
 const mongoDBURL = 'mongodb+srv://jasadelberg:HKjad473@cluster0.qr9yuh3.mongodb.net/';
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
 db.on('error', () => { console.log('MongoDB connection error:') });
@@ -38,6 +38,7 @@ var BusinessSchema = new mongoose.Schema({
 /**var User = mongoose.model('Business', BusinessSchema); */
 /**changed this since it is changing User instead of business*/
 var Business = mongoose.model('Business', BusinessSchema); 
+
 
 
 
@@ -211,6 +212,10 @@ if(!existingUser){
   }
 }
 });
+
+app.get('/businesses/', async(req, res) => {
+  res.send(Business.find());
+})
 
 
 

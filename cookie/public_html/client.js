@@ -1,3 +1,25 @@
+function onLoad(){
+  let container = document.getElementById('restaurantContainer');
+  let restaurantList = getRestaurants();
+  console.log(restaurantList);
+
+}
+
+async function  getRestaurants(){
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "http://137.184.38.238:80/businesses/");
+  xhr.send();
+  xhr.responseType = "json";
+  xhr.onload = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      const data = xhr.response;
+      return data;
+    } else {
+      console.log(`Error: ${xhr.status}`);
+    }
+  };
+}
+
 function login() {
   let us = document.getElementById('login_username').value;
   let pw = document.getElementById('login_password').value;
