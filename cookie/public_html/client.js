@@ -125,28 +125,6 @@ function postReview() {
 
 
 function createBusiness(){
-  
-  let us = document.getElementById('login_username').value;
-  let pw = document.getElementById('login_password').value;
-
-  let data = { username: us, password: pw };
-  let p = fetch('/account/login/', {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" }
-  });
-  //handles response
-  p.then((response) => {
-    return response.text();
-  }).then((text) => {
-    console.log(text);
-    if (text.startsWith('SUCCESS')) {
-      alert(text);
-      window.location.href = '/Buissness.html';
-    } else {
-      alert('failed');
-    }
-  });
 
   let name = document.getElementById('BName').value;
   let username = document.getElementById('BUsername').value;
