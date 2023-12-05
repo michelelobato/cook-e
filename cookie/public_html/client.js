@@ -248,7 +248,7 @@ window.onload = function(){
 
 function createHomePage(){
   let container = document.getElementById('restaurantContainer');
-  let restaurantList = getRestaurants();
+  
   
   fetch('/get/businesses/', {
     method: 'GET',
