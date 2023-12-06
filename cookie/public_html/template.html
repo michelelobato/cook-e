@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="restaurantTitle">>{{RestaurantName}} - Menu</title>
+    <link rel="stylesheet" href="template.css">
+</head>
+<body>
+
+    <header>
+      <div class="name">
+        <h1 id="restaurantName"></h1>
+    </div>
+    </header>
+
+    <main>
+        <!-- Restaurant Section -->
+        <section class="restaurant">
+            <section class="header-background"></section>
+                <h2 id="restaurantTagline"></h2>
+            </section>
+
+            <!-- Reviews Section -->
+            <section class="reviews" id="reviewsSection">
+                <h2 id="ratingTitle">Overall rating</h2>
+                <button type="submit" id="submitReviewButton">Post Review</button>
+            </section>
+
+            <!-- Menu Preview Section -->
+            <section class="menu-preview" id="menuPreviewSection">
+                <h3 id="popularDishesTitle">Popular dishes</h3>
+                <ul id="popularDishesList">
+                    {{#each PopularDishes}}
+                    <li id="{{this.Id}}">
+                        <img src="{{this.ImageURL}}" alt="{{this.Name}}" style="width:100%;">
+                        <span>{{this.Name}} - {{this.Price}}</span>
+                    </li>
+                    <li>
+                        <img src="img/spag.jpg" alt="Meatballs and Spaghetti" style="width:100%;">
+                        <span>Meatballs and Spaghetti - $16.99</span>
+                    </li>
+                    <li>
+                        <img src="img/pizza.jpg" alt="Vegan Pizza" style="width:100%;">
+                        <span>Vegan Pizza - $36.99</span>
+                    </li>
+                    {{/each}}
+                </ul>
+            </section>
+            
+            <!-- Location & Hours Section -->
+            <section class="location" id="locationSection">
+                <h3 id="locationTitle">Location & Hours</h3>
+                <p id="locationArea">Located in: {{LocationArea}}</p>
+                <address id="restaurantAddress">
+                    {{AddressLine1}}<br>
+                    {{AddressLine2}}
+                </address>
+                <p id="openingHours">Open {{OpeningHours}}</p>
+
+                <!-- Embed Google Maps -->
+                <div class="map" id="googleMap">
+                    <iframe src="{{GoogleMapsURL}}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </section>
+
+            <a href="{{OrderLink}}" id="orderNowLink">Order Now</a>
+        </section>
+    </main>
+
+</body>
+</html>
