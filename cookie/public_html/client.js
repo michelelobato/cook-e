@@ -164,6 +164,8 @@ function createBusiness(){
       console.error('Error:', error);
       alert('An error occurred during login');
   });
+
+
 }
 
 localStorage.setItem('business', 'test'); //CHANGE< USING FOR TESTING PURPOSES
@@ -247,8 +249,7 @@ window.onload = function(){
 };
 
 function createHomePage(){
-  let container = document.getElementById('restaurantContainer');
-  let restaurantList = getRestaurants();
+  
   
   fetch('/get/businesses/', {
     method: 'GET',
@@ -259,6 +260,10 @@ function createHomePage(){
   })
   .then((businessList) =>{
     console.log(businessList);
+    let container = document.getElementById('restaurantContainer');
+    container.innerHTML = '';
+    
+
   })
 };
 
