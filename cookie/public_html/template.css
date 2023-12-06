@@ -1,0 +1,132 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+}
+.header-background {
+    /*background-image: url(img/bgpizza.jpg);  
+    opacity: 15%;*/
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    width: 100%; 
+  }  
+
+header {
+    background-image: url(img/bgpizza.jpg);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.restaurantName {
+    margin: 0;
+    font-weight: bolder;
+    color: #000000;
+}
+
+.name {
+    background-color: white; 
+    padding: 10px 20px; 
+    display: inline-block; 
+    border-radius: 5px; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
+    
+}
+
+.restaurant {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid rgb(7, 7, 7);
+    border-radius: 5px;
+}
+
+.restaurant h3 {
+    margin: 0;
+}
+
+.restaurant p {
+    margin: 0;
+}
+
+.star-rating { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.stars {
+    display: inline-block;
+}
+
+.stars img {
+    width: 20px;
+    height: 20px;
+}
+
+.restaurant ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.restaurant ul li {
+    margin-bottom: 5px;
+}
+
+.restaurant a {
+    display: inline-block;
+    background-color: #000000;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.menu-preview ul {
+    display: flex; 
+    justify-content: space-around; 
+    flex-wrap: wrap; 
+  }
+  
+  .menu-preview li {
+    flex: 0 1 20vw; 
+    margin: 10px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+  }
+  
+  .menu-preview img {
+    width: 80%; 
+    height: auto; 
+    aspect-ratio: 1 / 1; 
+    object-fit: cover; 
+  }
+  
+  .menu-preview span {
+    text-align: center; 
+    margin-top: 0.5em; 
+  }
+
+  .location {
+    margin-bottom: 20px; /* Adjust this value to the space you want */
+}
+
+#submitReviewButton {
+    background-color: #4CAF50; 
+    color: white; 
+    padding: 15px 32px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    margin: 4px 2px; 
+    cursor: pointer; 
+    border: none; 
+    border-radius: 4px; 
+}
+
+#submitReviewButton:hover {
+    background-color: #45a049; 
+}
+
