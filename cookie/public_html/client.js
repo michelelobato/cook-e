@@ -129,18 +129,20 @@ function createBusiness() {
   let pw = document.getElementById('login_password').value;
 
   let data = { username: us, password: pw };
-  let loginPromise = fetch('/account/login/', {
+  let p = fetch('/account/login/', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: { "Content-Type": "application/json" }
   });
 
-  loginPromise.then((response) => {
+  // Handles response
+  p.then((response) => {
     return response.text();
   }).then((text) => {
     console.log(text);
     if (text.startsWith('SUCCESS')) {
-      
+      alert(text);
+
       let name = document.getElementById('BName').value;
       let username = document.getElementById('BUsername').value;
       let password = document.getElementById('BPassword').value;
@@ -190,6 +192,7 @@ function createBusiness() {
     }
   });
 }
+
 
 
 localStorage.setItem('business', 'test'); //CHANGE< USING FOR TESTING PURPOSES
