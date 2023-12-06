@@ -124,47 +124,73 @@ function postReview() {
 
 
 
-function createBusiness(){
+function createBusiness() {
+  let us = document.getElementById('login_username').value;
+  let pw = document.getElementById('login_password').value;
 
-  let name = document.getElementById('BName').value;
-  let username = document.getElementById('BUsername').value;
-  let password = document.getElementById('BPassword').value;
-  let menu = document.getElementById('"Bmenu').value;
-  let image = document.getElementById('BImages').value;
-  let phone = document.getElementById('BPhone').value;
-  let email = document.getElementById('BEmail').value;
-  let address = document.getElementById('BAddress').value;
-  let website = document.getElementById('BWebsite').value;
-  let logo = document.getElementById('BLogo').value;
-  let restaurantTag = document.getElementById('restaurantTagline').value;
-  let dishesList = document.getElementById('dishesList').value;
-  let hours = document.getElementById('openingHours').value;
+  let data = { username: us, password: pw };
+  let loginPromise = fetch('/account/login/', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" }
+  });
 
-  let Bdata = { BName: name, username: username, password: password,
-       menu: menu, image: image, phone: phone, email: email, address: address,
-      website: website, logo: logo, restaurantTag: restaurantTag,dishesList: dishesList, hours: hours };
-        
- let p = fetch('/create/business', {
-      method: 'POST',
-      body: JSON.stringify(Bdata),
-      headers: { "Content-Type": "application/json" }
-  })
-  p.then(response => {
-      return response.text();
-  })
-  p.then(text => {
-      if (text.startsWith('SUCCESS')) {
-          alert('creation successful');
-          window.location.href = '/index.html';
-      } else {
-          alert('login failed');
-      }
-  })
-  p.catch(error => {
-      console.error('Error:', error);
-      alert('An error occurred during login');
+  loginPromise.then((response) => {
+    return response.text();
+  }).then((text) => {
+    console.log(text);
+    if (text.startsWith('SUCCESS')) {
+      // Continue with creating business after successful login
+      let name = document.getElementById('BName').value;
+      let username = document.getElementById('BUsername').value;
+      let password = document.getElementById('BPassword').value;
+      let menu = document.getElementById('BMenu').value; // Fix typo here
+      let image = document.getElementById('BImages').value;
+      let phone = document.getElementById('BPhone').value;
+      let email = document.getElementById('BEmail').value;
+      let address = document.getElementById('BAddress').value;
+      let website = document.getElementById('BWebsite').value;
+      let logo = document.getElementById('BLogo').value;
+
+      let Bdata = {
+        BName: name,
+        username: username,
+        password: password,
+        menu: menu,
+        image: image,
+        phone: phone,
+        email: email,
+        address: address,
+        website: website,
+        logo: logo
+      };
+
+      fetch('/create/business', {
+        method: 'POST',
+        body: JSON.stringify(Bdata),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(response => {
+        return response.text();
+      })
+      .then(text => {
+        if (text.startsWith('SUCCESS')) {
+          alert('Creation successful');
+          window.location.href = '/home.html';
+        } else {
+          alert('Creation failed');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred during creation');
+      });
+    } else {
+      alert('Login failed');
+    }
   });
 }
+
 
 localStorage.setItem('business', 'test'); //CHANGE< USING FOR TESTING PURPOSES
 
