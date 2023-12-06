@@ -124,49 +124,46 @@ function postReview() {
 
 
 
-function createBusiness(){
+function createBusiness() {
 
-  let name = document.getElementById('BName').value;
-  let username = document.getElementById('BUsername').value;
-  let password = document.getElementById('BPassword').value;
-  let menu = document.getElementById('Bmenu').value;
-  let image = document.getElementById('BImages').value;
-  let phone = document.getElementById('BPhone').value;
-  let email = document.getElementById('BEmail').value;
-  let address = document.getElementById('BAddress').value;
-  let website = document.getElementById('BWebsite').value;
-  let logo = document.getElementById('BLogo').value;
-  let restaurantTag = document.getElementById('restaurantTagline').value;
-  let dishesList = document.getElementById('dishesList').value;
-  let hours = document.getElementById('openingHours').value;
 
-  let Bdata = { BName: name, username: username, password: password,
-       menu: menu, image: image, phone: phone, email: email, address: address,
-      website: website, logo: logo, restaurantTag: restaurantTag,dishesList: dishesList, hours: hours };
-        
-  fetch('/create/business', {
-      method: 'POST',
-      body: JSON.stringify(Bdata),
-      headers: { "Content-Type": "application/json" }
-  })
-  .then(response => {
-      return response.text();
-  })
-  .then(text => {
-      if (text.startsWith('SUCCESS')) {
-          alert('creation successful');
+      let name = document.getElementById('BName').value;
+      let username = document.getElementById('BUsername').value;
+      let password = document.getElementById('BPassword').value;
+
+
+      let Bdata = {
+        name: name,
+        username: username,
+        password: password
+       
+      };
+      
+
+      fetch('/business/create', {
+        method: 'POST',
+        body: JSON.stringify(Bdata),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(response => {
+        return response.text();
+      })
+      .then(text => {
+       
+        if (text.startsWith('SUCCESS')) {
+          alert('Creation successful');
           window.location.href = '/index.html';
-      } else {
-          alert('login failed');
-      }
-  })
-  .catch(error => {
-      console.error('Error:', error);
-      alert('An error occurred during login');
-  });
+        } else {
+          alert('Creation failed');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred during creation');
+      });
+   
+    }
 
-
-}
 
 localStorage.setItem('business', 'test'); //CHANGE< USING FOR TESTING PURPOSES
 
