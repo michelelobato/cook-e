@@ -262,6 +262,11 @@ function createHomePage(){
     console.log(businessList);
     let container = document.getElementById('restaurantContainer');
 
+    businessList.forEach(business)=>{
+      const businessBox= document.createElement('div')
+
+    }
+
   })
 };
 
