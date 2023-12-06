@@ -1,65 +1,60 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="BStyle.css" />
-        <script src="client.js"></script>
+        <link rel="stylesheet" href="/BStyle.css" />
     </head>
     <body id ="BBody">
         <div id ="Bbase">
-        <form id ="BuissnessCreate">
-            <label for="name"><h3>Buissness Name</h3></label><br>
-            <input type = "text" id = "BName" name = "BName" placeholder="Buissness Name" required="required"><br>
-           <br>
-           <br>
-            <h3>Create Account To Manage Buissness</h3>
-            <label for="name">Username</label>
-            <input type = "text" id ="BUsername" name = "BUsername" placeholder="Username" required="required"><br>
-
-            <label for="name">Password</label>
-            <input type = "text" id ="BPassword" name = "BPassword" placeholder="Password" required="required"><br>
-
-            <label for="name">Menu</label><br>
-            <input type ="file" id = "BMenu" name = "Bmenu"><br>
-
-            <label for="name">Gallary Images</label><br>
-            <input type = "file" id = "BImages" name = "BImages"><br>
-            <button type = "button">Add More Images</button><br>
-
-            <label for="name">Phone Number</label>
-            <input type = "text" id ="BPhone" name = "BPhone" placeholder="Phone Number" ><br>
+            <form id="BuissnessCreate" action="/submit-form" method="post">
+                <label for="name"><h3>Buissness Name</h3></label><br>
+                <input type = "text" id = "BName" name = "BName" placeholder="Buissness Name" required="required"><br>
+               <br>
+               <br>
+                <h3>Create Account To Manage Buissness</h3>
+                <label for="name">Username</label>
+                <input type = "text" id ="BUsername" name = "BUsername" placeholder="Username" required="required"><br>
+    
+                <label for="name">Password</label>
+                <input type = "text" id ="BPassword" name = "BPassword" placeholder="Password" required="required"><br>
+    
+                <label for="name">Menu</label><br>
+                <input type ="file" id = "BMenu" name = "Bmenu"><br>
+    
+                <label for="name">Gallary Images</label><br>
+                <input type = "file" id = "BImages" name = "BImages"><br>
+                <button type = "button">Add More Images</button><br>
+    
+                <label for="name">Phone Number</label>
+                <input type = "text" id ="BPhone" name = "BPhone" placeholder="Phone Number" required="required"><br>
+                
+                <label for="name">Email</label>
+                <input type = "text" id ="BEmail" name = "BEmail" placeholder="Email" required="required"><br>
+                
+                <label for="name">Address</label>
+                <input type = "text" id ="BAddress" name = "BAddress" placeholder="Address"><br>
+                
+                <label for="name">Website</label>
+                <input type = "text" id ="BWebsite" name = "BWebsite" placeholder="Website URL" required="required"><br>
+                <input type = "file" id = "BLogo" name = "BLogo"><br>
+    
+                <label for ="name">Restaurant Tagline</label>
+                <input type = "text" id ="BrestaurantTagline" name = "restaurantTagline" placeholder="restaurantTagline"><br>
+    
+                <label for ="name">Popular Dish 1</label>
+                <input type = "text" id ="BdishesList" name = "dishesList" placeholder="Popular Dish 1"><br>
+                <label for ="name">Popular Dish 2</label>
+                <input type = "text" id ="BdishesList" name = "dishesList" placeholder="Popular Dish 2"><br>
+                <label for ="name">Popular Dish 3</label>
+                <input type = "text" id ="BdishesList" name = "dishesList" placeholder="Popular Dish 3"><br>
+    
+                <label for ="name">Opening Hours</label>
+                <input type = "text" id ="openingHours" name = "openingHours" placeholder="Opening Hours"><br>
+                
+    
+                
             
-            <label for="name">Email</label>
-            <input type = "text" id ="BEmail" name = "BEmail" placeholder="Email"><br>
-            
-            <label for="name">Address</label>
-            <input type = "text" id ="BAddress" name = "BAddress" placeholder="Address"><br>
-            
-            <label for="name">Website</label>
-            <input type = "text" id ="BWebsite" name = "BWebsite" placeholder="Website URL"><br>
-            <input type = "file" id = "BLogo" name = "BLogo"><br>
-
-            <label for ="name">Restaurant Tagline</label>
-            <input type = "text" id ="RestaurantTagline" name = "RestaurantTagline" placeholder="RestaurantTagline"><br>
-
-            <label for ="name">Popular Dish 1</label>
-            <input type = "text" id ="dishesList" name = "dishesList" placeholder="Popular Dish 1"><br>
-            <label for ="name">Popular Dish 2</label>
-            <input type = "text" id ="dishesList" name = "dishesList" placeholder="Popular Dish 2"><br>
-            <label for ="name">Popular Dish 3</label>
-            <input type = "text" id ="dishesList" name = "dishesList" placeholder="Popular Dish 3"><br>
-
-            <label for ="name">Opening Hours</label>
-            <input type = "text" id ="openingHours" name = "openingHours" placeholder="Opening Hours"><br>
-            
-
-            
-            
-   
- <input onclick= "createBusiness();" type="button" value= "Submit"/>
-
-
+            <button type="submit" id="buttn">Submit</button>
         </form>
-             
     </div>
     </body>
 </html>
