@@ -262,12 +262,35 @@ function createHomePage(){
     console.log(businessList);
     let container = document.getElementById('restaurantContainer');
 
-    businessList.forEach(business)=>{
-      const businessBox= document.createElement('div')
+    businessList.forEach((business)=>{
+      const businessBox= document.createElement('div');
+      businessBox.height = '30vh';
 
-    }
+      const nameDiv= dcoument.createElement('div');
+      nameDiv.innerHTML = `<p><strong>${business.name}</strong></p>`;
+
+
+
+      const starsDiv = document.createElement('div');
+      starsDiv.className = 'stars';
+
+      // Gets the review's starRating
+      for (let i = 0; i < review.starRating; i++) {
+          const starSpan = document.createElement('span');
+          starSpan.className = 'yellow-star';
+          starSpan.innerHTML = '★';
+          starsDiv.appendChild(starSpan);
+      }
+
+      businessBox.append(nameDiv);
+      businessBox.appendChild(starsDiv);
+
+    });
 
   })
+  .catch((error) => {
+    console.error('Error', error);
+  });
 };
 
 

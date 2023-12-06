@@ -73,6 +73,8 @@ body{
     margin-left: 5vw;
     margin-right: 5vw;
     margin-top: 5vh;
+    resize: both;
+    overflow:auto;
     
     border: black solid;
 }
