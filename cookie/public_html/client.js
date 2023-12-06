@@ -124,61 +124,49 @@ function postReview() {
 
 
 
-function createBusiness() {
+function createBusiness(){
 
+  let name = document.getElementById('BName').value;
+  let username = document.getElementById('BUsername').value;
+  let password = document.getElementById('BPassword').value;
+  let menu = document.getElementById('Bmenu').value;
+  let image = document.getElementById('BImages').value;
+  let phone = document.getElementById('BPhone').value;
+  let email = document.getElementById('BEmail').value;
+  let address = document.getElementById('BAddress').value;
+  let website = document.getElementById('BWebsite').value;
+  let logo = document.getElementById('BLogo').value;
+  let restaurantTag = document.getElementById('restaurantTagline').value;
+  let dishesList = document.getElementById('dishesList').value;
+  let hours = document.getElementById('openingHours').value;
 
-      let name = document.getElementById('BName').value;
-      let username = document.getElementById('BUsername').value;
-      let password = document.getElementById('BPassword').value;
-      let menu = document.getElementById('BMenu').value; 
-      let image = document.getElementById('BImages').value;
-      let phone = document.getElementById('BPhone').value;
-      let email = document.getElementById('BEmail').value;
-      let address = document.getElementById('BAddress').value;
-      let website = document.getElementById('BWebsite').value;
-      let logo = document.getElementById('BLogo').value;
-
-      let Bdata = {
-        BName: name,
-        username: username,
-        password: password,
-        menu: menu,
-        image: image,
-        phone: phone,
-        email: email,
-        address: address,
-        website: website,
-        logo: logo
-      };
-
-      fetch('/create/business', {
-        method: 'POST',
-        body: JSON.stringify(Bdata),
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(response => {
-        return response.text();
-      })
-      .then(text => {
-        if (text.startsWith('SUCCESS')) {
-          alert('Creation successful');
-          window.location.href = '/home.html';
-        } else {
-          alert('Creation failed');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred during creation');
-      });
-   
-    }
+  let Bdata = { BName: name, username: username, password: password,
+       menu: menu, image: image, phone: phone, email: email, address: address,
+      website: website, logo: logo, restaurantTag: restaurantTag,dishesList: dishesList, hours: hours };
+        
+  fetch('/create/business', {
+      method: 'POST',
+      body: JSON.stringify(Bdata),
+      headers: { "Content-Type": "application/json" }
+  })
+  .then(response => {
+      return response.text();
+  })
+  .then(text => {
+      if (text.startsWith('SUCCESS')) {
+          alert('creation successful');
+          window.location.href = '/index.html';
+      } else {
+          alert('login failed');
+      }
+  })
+  .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred during login');
   });
 
 
 }
-
-
 
 localStorage.setItem('business', 'test'); //CHANGE< USING FOR TESTING PURPOSES
 
@@ -261,8 +249,7 @@ window.onload = function(){
 };
 
 function createHomePage(){
-  let container = document.getElementById('restaurantContainer');
-  let restaurantList = getRestaurants();
+  
   
   fetch('/get/businesses/', {
     method: 'GET',
@@ -274,8 +261,6 @@ function createHomePage(){
   .then((businessList) =>{
     console.log(businessList);
     let container = document.getElementById('restaurantContainer');
-    container.innerHTML = '';
-    
 
   })
 };

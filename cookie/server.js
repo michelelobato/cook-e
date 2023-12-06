@@ -11,7 +11,8 @@ const crypto = require('crypto');
 
 
 const db  = mongoose.connection;
-const mongoDBURL = 'mongodb+srv://jasadelberg:HKjad473@cluster0.qr9yuh3.mongodb.net/';
+const mongoDBURL =  'mongodb+srv://admin:ffucSFRiLP8txvNX@cluster0.l2iybs5.mongodb.net/?retryWrites=true&w=majority';
+// 'mongodb+srv://jasadelberg:HKjad473@cluster0.qr9yuh3.mongodb.net/';
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
 db.on('error', () => { console.log('MongoDB connection error:') });
 
