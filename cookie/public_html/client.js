@@ -140,11 +140,11 @@ function createBusiness() {
   }).then((text) => {
     console.log(text);
     if (text.startsWith('SUCCESS')) {
-      // Continue with creating business after successful login
+      
       let name = document.getElementById('BName').value;
       let username = document.getElementById('BUsername').value;
       let password = document.getElementById('BPassword').value;
-      let menu = document.getElementById('BMenu').value; // Fix typo here
+      let menu = document.getElementById('BMenu').value; 
       let image = document.getElementById('BImages').value;
       let phone = document.getElementById('BPhone').value;
       let email = document.getElementById('BEmail').value;
