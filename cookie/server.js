@@ -33,16 +33,8 @@ var BusinessSchema = new mongoose.Schema({
   name: String,
   username: String,
   password: String,
-  menu: String,
-  image: String,
-  phone: String,
-  email: String,
-  address: String,
-  website: String, 
-  logo: String,
-  restaurantTagline: String,
-  dishesList: String,
-  openingHours: String
+  
+
 });
 /**var User = mongoose.model('Business', BusinessSchema); */
 /**changed this since it is changing User instead of business*/
@@ -208,32 +200,33 @@ app.post('/add/review', async (req, res) => {
 });
 
 
-app.post('/create/business', async (req, res) => {
-//creates a business
-  const { Bname, username, password, menu,
-  image, phone, email, address, website, logo, RestaurantTagline, dishesList, openingHours} = req.body;
-console.log("business named "+Bname+" created");
-  // Check if a user with the same username already exists
-  const existingBusiness = await BusinessSchema.findOne({ Bname });
-  const existingUser = await UserSchema.findOne({ username });
-if(existingUser){
-  res.status(400).json({ error: 'username account does not exist' });
-  
-}else{
-  if (existingBusiness) {
-    res.status(400).json({ error: 'business already exists' });
-  } else {
-    try {
-      const newBusiness = await BusinessSchema.create({ Bname, username, password, menu,
-        image, phone, email, address, website, logo ,restaurantTagline, dishesList, openingHours});
-      res.status(201).json(BusinessSchema);
-    } catch (err) {
-      res.status(500).json({ error: 'Failed to create business' });
-    }
-  }
-}
-});
+app.post('/business/create', async (req, res) => {
 
+  // Creates an account for the user
+  try {
+    const { name, username, password } = req.body;
+
+    const newBusiness = new Business({
+      name: name,
+      username: username,
+      password: password
+    });
+  
+    console.log(newBusiness);
+    
+    await newBusiness.save()
+
+          .then(() => {
+            res.end('SUCCESS');
+          })
+          .catch(() => {
+            res.end('DATABASE SAVE ISSUE');
+          });
+        }catch(error){
+console.error(error);
+res.status(500).json({error: 'server error'});
+        }
+        });
 
 app.get('/get/reviews/:business', async (req, res) => {
 //gets all the business's reviews
