@@ -5,11 +5,9 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const fs = require('fs');
 const crypto = require('crypto');
 const path = require('path');
-
-
+const fs = require('fs').promises; 
 
 
 const db  = mongoose.connection;
@@ -261,7 +259,7 @@ app.get('/get/businesses/', async (req, res) => {
 });
 
 
-app.use(express.static("/public"))
+app.use(express.static("/public_html"))
 app.use('/img', express.static(__dirname + '/img'));
 
 // creating the dynamic website that takes information fromthe business form and creates a webpage in the given template
