@@ -131,11 +131,12 @@ function createBusiness() {
   let phone = document.getElementById('BPhone').value;
   let email = document.getElementById('BEmail').value;
   let address = document.getElementById('BAddress').value;
+  let city = document.getElementById('BLocation').value;
   let website = document.getElementById('BWebsite').value;
   let restaurantTagline = document.getElementById('BTagline').value;
-  let dishList1 = document.getElementById('BDishList1').value;
-  let dishList2 = document.getElementById('BDishList2').value;
-  let dishList3 = document.getElementById('BDishList3').value;
+  let dishList1 = document.getElementById('BdishesList1').value;
+  let dishList2 = document.getElementById('BdishesList2').value;
+  let dishList3 = document.getElementById('BdishesList3').value;
   let openingHours = document.getElementById('BOpeningHours').value;
 
   let Bdata = {
@@ -145,6 +146,7 @@ function createBusiness() {
     phone: phone,
     email: email,
     address: address,
+    city: city,
     website: website,
     restaurantTagline: restaurantTagline,
     dishList1: dishList1,
