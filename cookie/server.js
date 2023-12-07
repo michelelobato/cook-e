@@ -16,8 +16,8 @@ const mongoDBURL = 'mongodb+srv://jasadelberg:HKjad473@cluster0.qr9yuh3.mongodb.
 mongoose.connect(mongoDBURL, { useNewUrlParser: true })
   .then(client => {
     console.log('Connected to Database');
-    const db = client.db('project 0');
-    const dataCollection = db.collection('Cluster 0');
+    const db = client.db('project0');
+    const dataCollection = db.collection('Cluster0');
 
     // API endpoint to get data
     app.get('/api/data', (req, res) => {
