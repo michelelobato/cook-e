@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="restaurantTitle">>{{RestaurantName}} - Menu</title>
-    <link rel="stylesheet" href="template.css">
+    <link rel="stylesheet" href="yelp.css">
 </head>
 <body>
 
@@ -17,55 +17,48 @@
     <main>
         <!-- Restaurant Section -->
         <section class="restaurant">
-            <section class="header-background"></section>
-                <h2 id="restaurantTagline"></h2>
+            <section class="header-background">
+                <h2 id="restaurantTagline"> </h2>
             </section>
 
             <!-- Reviews Section -->
-            <section class="reviews" id="reviewsSection">
-                <h2 id="ratingTitle">Overall rating</h2>
+            <section class="reviews">
+                <h2>Overall rating</h2>
+                <div class="star-rating">
+                    <div style="width: 70%;">★★★★★</div>
+                </div>
+                <p>201 reviews</p>
                 <button type="submit" id="submitReviewButton" onclick="window.location.href='review.html'">Post Review</button>
-
             </section>
 
-            <!-- Menu Preview Section -->
-            <section class="menu-preview" id="menuPreviewSection">
+            <section class="menu-preview">
                 <h3 id="popularDishesTitle">Popular dishes</h3>
-                <ul id="popularDishesList">
-                    {{#each PopularDishes}}
-                    <li id="{{this.Id}}">
-                        <img src="{{this.ImageURL}}" alt="{{this.Name}}" style="width:100%;">
-                        <span>{{this.Name}} - {{this.Price}}</span>
-                    </li>
-                    <li>
-                        <img src="img/spag.jpg" alt="Meatballs and Spaghetti" style="width:100%;">
-                        <span>Meatballs and Spaghetti - $16.99</span>
-                    </li>
-                    <li>
-                        <img src="img/pizza.jpg" alt="Vegan Pizza" style="width:100%;">
-                        <span>Vegan Pizza - $36.99</span>
-                    </li>
-                    {{/each}}
-                </ul>
+                        
+                <!-- Form to input popular dishes -->
+                <form id="popularDishesForm">
+                    <label for="dish1">Popular Dish 1</label>
+                    <br>
+                    <label for="dish2">Popular Dish 2</label>
+                    <br>
+                    <label for="dish3">Popular Dish 3</label>
+                </form>
             </section>
-            
+
             <!-- Location & Hours Section -->
-            <section class="location" id="locationSection">
+            <section class="location">
                 <h3 id="locationTitle">Location & Hours</h3>
                 <p id="locationArea">Located in: {{LocationArea}}</p>
-                <address id="restaurantAddress">
-                    {{AddressLine1}}<br>
-                    {{AddressLine2}}
-                </address>
-                <p id="openingHours">Open {{OpeningHours}}</p>
+                <address id="restaurantAddress"> {{restaurantAddress}} </address>
+
+                <p id="openingHours">Open: {{openingHours}}</p>
 
                 <!-- Embed Google Maps -->
-                <div class="map" id="googleMap">
-                    <iframe src="{{GoogleMapsURL}}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.1234567890!2d-110.9776801234567!3d32.39090712345678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1234567890abcdef!2sOracle%20Crossing%20Shopping%20Center!5e0!3m2!1sen!2sus!4v1234567890123" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </section>
 
-            <a href="{{OrderLink}}" id="orderNowLink">Order Now</a>
+            <a href="#">Order Now</a>
         </section>
     </main>
 
