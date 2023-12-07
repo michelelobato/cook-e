@@ -133,7 +133,7 @@ function createBusiness() {
   let address = document.getElementById('BAddress').value;
   let city = document.getElementById('BLocation').value;
   let website = document.getElementById('BWebsite').value;
-  let restaurantTagline = document.getElementById('BTagline').value;
+  let restaurantTagline = document.getElementById('restaurantTagline').value;
   let dishList1 = document.getElementById('BdishesList1').value;
   let dishList2 = document.getElementById('BdishesList2').value;
   let dishList3 = document.getElementById('BdishesList3').value;
