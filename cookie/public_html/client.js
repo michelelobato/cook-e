@@ -125,48 +125,60 @@ function postReview() {
 
 
 function createBusiness() {
+  let name = document.getElementById('BName').value;
+  let username = document.getElementById('BUsername').value;
+  let password = document.getElementById('BPassword').value;
+  let phone = document.getElementById('BPhone').value;
+  let email = document.getElementById('BEmail').value;
+  let address = document.getElementById('BAddress').value;
+  let website = document.getElementById('BWebsite').value;
+  let restaurantTagline = document.getElementById('BTagline').value;
+  let dishList1 = document.getElementById('BDishList1').value;
+  let dishList2 = document.getElementById('BDishList2').value;
+  let dishList3 = document.getElementById('BDishList3').value;
+  let openingHours = document.getElementById('BOpeningHours').value;
 
+  let Bdata = {
+    name: name,
+    username: username,
+    password: password,
+    phone: phone,
+    email: email,
+    address: address,
+    website: website,
+    restaurantTagline: restaurantTagline,
+    dishList1: dishList1,
+    dishList2: dishList2,
+    dishList3: dishList3,
+    openingHours: openingHours,
+  };
 
-      let name = document.getElementById('BName').value;
-      let username = document.getElementById('BUsername').value;
-      let password = document.getElementById('BPassword').value;
-
-
-      let Bdata = {
-        name: name,
-        username: username,
-        password: password
-       
-      };
-      
-
-      fetch('/business/create', {
-        method: 'POST',
-        body: JSON.stringify(Bdata),
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(response => {
-        return response.text();
-      })
-      .then(text => {
-       
-        if (text.startsWith('SUCCESS')) {
-          alert('Creation successful');
-          window.location.href = '/index.html';
-        } else {
-          alert('Creation failed');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred during creation');
-      });
-   
+  fetch('/business/create', {
+    method: 'POST',
+    body: JSON.stringify(Bdata),
+    headers: { 'Content-Type': 'application/json' },
+  })
+  .then(response => response.text())
+  .then(text => {
+    if (text.startsWith('SUCCESS')) {
+      alert('Creation successful');
+      window.location.href = '/index.html';
+    } else {
+      alert('Creation failed');
     }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred during creation');
+  });
+}
+
+
+
+
 
 
 localStorage.setItem('business', 'test'); //CHANGE< USING FOR TESTING PURPOSES
-
 function getAllReviews() {
     let business = localStorage.getItem('business');
 
@@ -226,24 +238,18 @@ function formatDate(dateString) {
 
 window.onload = function() {
     getAllReviews();
+    createHomePage();
+    changeRestaurant();
 };
 
 function changeRestaurant() {
 //changes the business name on the review page
-  var restaurantTitleElement = 'CHANGE';
-  if (restaurantTitleElement) {
-    restaurantTitleElement.innerHTML = "Reviews for " + generateRandomRestaurantName();
-  } else {
-    console.error("Element with id 'restaurantTitle' not found.");
-  }
-}
 
-window.onload = changeRestaurant;
+    restaurantTitle.textContent = "Reviews for " + localStorage.getItem('business');
+ }
 
 
-window.onload = function(){
-  createHomePage();
-};
+
 
 function createHomePage(){
   
