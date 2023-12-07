@@ -263,26 +263,17 @@ function createHomePage(){
       const businessBox= document.createElement('div');
       businessBox.height = '30vh';
 
-      const nameDiv= dcoument.createElement('div');
+      const nameDiv= document.createElement('div');
       nameDiv.innerHTML = `<p><strong>${business.name}</strong></p>`;
+      
 
 
+      businessBox.appendChild(nameDiv);
+      container.appendChild(businessBox)
 
-      const starsDiv = document.createElement('div');
-      starsDiv.className = 'stars';
-
-      // Gets the review's starRating
-      for (let i = 0; i < review.starRating; i++) {
-          const starSpan = document.createElement('span');
-          starSpan.className = 'yellow-star';
-          starSpan.innerHTML = '★';
-          starsDiv.appendChild(starSpan);
-      }
-
-      businessBox.append(nameDiv);
-      businessBox.appendChild(starsDiv);
-
-    });
+    }
+    );
+    
 
   })
   .catch((error) => {
