@@ -13,22 +13,24 @@ const fs = require('fs').promises;
 const db  = mongoose.connection;
 // const mongoDBURL =  'mongodb+srv://admin:ffucSFRiLP8txvNX@cluster0.l2iybs5.mongodb.net/?retryWrites=true&w=majority';
 const mongoDBURL = 'mongodb+srv://jasadelberg:HKjad473@cluster0.qr9yuh3.mongodb.net/';
-mongoose.connect(mongoDBURL, { useNewUrlParser: true });
-.then(client => {
-        console.log('Connected to Database');
-        const db = client.db('project 0');
-        const dataCollection = db.collection('Cluster 0');
+mongoose.connect(mongoDBURL, { useNewUrlParser: true })
+  .then(client => {
+    console.log('Connected to Database');
+    const db = client.db('project 0');
+    const dataCollection = db.collection('Cluster 0');
 
-        // API endpoint to get data
-        app.get('/api/data', (req, res) => {
-            dataCollection.find({}).toArray()
-                .then(results => {
-                    res.json(results);
-                })
-                .catch(error => console.error(error));
-        });
-})
-db.on('error', () => { console.log('MongoDB connection error:') });
+    // API endpoint to get data
+    app.get('/api/data', (req, res) => {
+      dataCollection.find({}).toArray()
+        .then(results => {
+          res.json(results);
+        })
+        .catch(error => console.error(error));
+    });
+  })
+  .catch(error => {
+    console.error('MongoDB connection error:', error);
+  });
 
 
 
