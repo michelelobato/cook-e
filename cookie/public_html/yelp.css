@@ -5,20 +5,6 @@ body {
     text-align: center;
 
 }
-.header-background {
-    background-image: url(Img/bgpizza.jpg); 
-    opacity: 15%;
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    width: 100%; 
-  }  
-
-.header {
-    background-image: url(img/bgpizza.jpg);  
-    color: rgb(10, 9, 9);
-    text-align: center;
-    padding: 20px 0;
-}
 
 .header h1 {
     margin: 0;
@@ -27,13 +13,12 @@ body {
 }
 
 .name {
-    background-image: url(img/bgpizza.jpg);
-    background-color: white; 
-    padding: 10px 20px; 
-    display: inline-block; 
-    border-radius: 5px; 
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
-    
+    background-image: url(img/bgpizza.jpg); 
+    z-index: 10;
+    text-align: center;
+    padding: 25px 0;
+    background-repeat: repeat; 
+    width: 100%; 
 }
 
 .restaurant {
@@ -41,6 +26,15 @@ body {
     padding: 20px;
     border: 1px solid rgb(7, 7, 7);
     border-radius: 5px;
+}
+
+#restaurantName{
+    z-index: 10;
+    background-color: white; 
+    padding: 10px 20px; 
+    display: inline-block; 
+    border-radius: 3px; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
 }
 
 .restaurant h3 {
@@ -134,3 +128,4 @@ body {
 #popularDishesForm label {
     margin-bottom: 10px; /* Adjust the value to control the spacing */
 }
+
