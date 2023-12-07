@@ -9,8 +9,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 
 
-app.use(express.static("/public"))
-app.use('/img', express.static(__dirname + '/img'));
+
 
 const db  = mongoose.connection;
 // const mongoDBURL =  'mongodb+srv://admin:ffucSFRiLP8txvNX@cluster0.l2iybs5.mongodb.net/?retryWrites=true&w=majority';
@@ -259,6 +258,11 @@ app.get('/get/businesses/', async (req, res) => {
   }
   
 });
+const app = express();
+
+
+app.use(express.static("/public"))
+app.use('/img', express.static(__dirname + '/img'));
 
 // creating the dynamic website that takes information fromthe business form and creates a webpage in the given template
 
