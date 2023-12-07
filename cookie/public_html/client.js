@@ -270,8 +270,13 @@ function createHomePage(){
       businessBox.height = '30vh';
 
       const nameDiv= document.createElement('div');
-      nameDiv.innerHTML = `<p><strong>${business.name}</strong></p>`;
-      
+      nameDiv.innerHTML = `<p><strong>${business.name}</strong>
+      <br><summary>${business.phone}
+      <br>${business.address}
+      <br>${business.openingHours}</summary>
+      <br>${business.restaurantTagline}
+      </p>`;
+
 
 
       businessBox.appendChild(nameDiv);
