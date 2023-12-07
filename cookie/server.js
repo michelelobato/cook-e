@@ -161,9 +161,10 @@ app.post('/account/create', (req, res) => {
           .then(() => {
             res.end('USER CREATED');
           })
-          .catch(() => {
-            res.end('DATABASE SAVE ISSUE');
-          });
+          .catch((error) => {
+    console.error(error);
+    res.end('DATABASE SAVE ISSUE');
+});
       } else {
         res.end('USERNAME ALREADY TAKEN');
       }
