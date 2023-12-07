@@ -179,7 +179,6 @@ function createBusiness() {
 
 
 localStorage.setItem('business', 'test'); //CHANGE< USING FOR TESTING PURPOSES
-
 function getAllReviews() {
     let business = localStorage.getItem('business');
 
@@ -239,24 +238,18 @@ function formatDate(dateString) {
 
 window.onload = function() {
     getAllReviews();
+    createHomePage();
+    changeRestaurant();
 };
 
 function changeRestaurant() {
 //changes the business name on the review page
-  var restaurantTitleElement = 'CHANGE';
-  if (restaurantTitleElement) {
-    restaurantTitleElement.innerHTML = "Reviews for " + generateRandomRestaurantName();
-  } else {
-    console.error("Element with id 'restaurantTitle' not found.");
-  }
-}
 
-window.onload = changeRestaurant;
+    restaurantTitle.textContent = "Reviews for " + localStorage.getItem('business');
+ }
 
 
-window.onload = function(){
-  createHomePage();
-};
+
 
 function createHomePage(){
   
