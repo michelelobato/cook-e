@@ -8,9 +8,10 @@
 </head>
 <body>
 
-    <header>
+    <header id="header"> 
       <div class="name">
         <h1 id="restaurantName"></h1>
+
     </div>
     </header>
 
@@ -33,15 +34,12 @@
 
             <section class="menu-preview">
                 <h3 id="popularDishesTitle">Popular dishes</h3>
-                        
-                <!-- Form to input popular dishes -->
-                <form id="popularDishesForm">
-                    <label for="dish1">Popular Dish 1</label>
-                    <br>
-                    <label for="dish2">Popular Dish 2</label>
-                    <br>
-                    <label for="dish3">Popular Dish 3</label>
-                </form>
+                    
+                <h4 id="dish1">{{Pop1}}</h4>
+                
+                <h4 id="dish2">{{Pop2}}</h4>
+                
+                <h4 id="dish3">{{Pop3}}</h4>
             </section>
 
             <!-- Location & Hours Section -->
@@ -49,8 +47,10 @@
                 <h3 id="locationTitle">Location & Hours</h3>
                 <p id="locationArea">Located in: {{LocationArea}}</p>
                 <address id="restaurantAddress"> {{restaurantAddress}} </address>
-
                 <p id="openingHours">Open: {{openingHours}}</p>
+                <p id="website">Learn more: {{website}}</p>
+
+                <br>
 
                 <!-- Embed Google Maps -->
                 <div class="map">
