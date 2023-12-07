@@ -29,16 +29,23 @@ db.on('error', () => { console.log('MongoDB connection error:') });
 var User = mongoose.model('User', UserSchema);
 
 //Business schema
+
 var BusinessSchema = new mongoose.Schema({
   name: String,
   username: String,
   password: String,
-  
-
+  phone: String,
+  email: String,
+  address: String,
+  website: String,
+  restaurantTagline: String,
+  dishList1: String,
+  dishList2: String,
+  dishList3: String,
+  openingHours: String,
 });
-/**var User = mongoose.model('Business', BusinessSchema); */
-/**changed this since it is changing User instead of business*/
-var Business = mongoose.model('Business', BusinessSchema); 
+
+var Business = mongoose.model('Business', BusinessSchema);
 
 
 
