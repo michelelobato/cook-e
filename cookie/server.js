@@ -258,7 +258,6 @@ app.get('/get/businesses/', async (req, res) => {
   }
   
 });
-const app = express();
 
 
 app.use(express.static("/public"))
