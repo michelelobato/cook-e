@@ -6,27 +6,28 @@ body {
 
 }
 .header-background {
-    /*background-image: url(img/bgpizza.jpg);  
-    opacity: 15%;*/
+    background-image: url(Img/bgpizza.jpg); 
+    opacity: 15%;
     background-size: cover; 
     background-repeat: no-repeat; 
     width: 100%; 
   }  
 
-header {
-    background-image: url(img/bgpizza.jpg);
-    color: white;
+.header {
+    background-image: url(img/bgpizza.jpg);  
+    color: rgb(10, 9, 9);
     text-align: center;
     padding: 20px 0;
 }
 
-.restaurantName {
+.header h1 {
     margin: 0;
     font-weight: bolder;
     color: #000000;
 }
 
 .name {
+    background-image: url(img/bgpizza.jpg);
     background-color: white; 
     padding: 10px 20px; 
     display: inline-block; 
@@ -130,3 +131,6 @@ header {
     background-color: #45a049; 
 }
 
+#popularDishesForm label {
+    margin-bottom: 10px; /* Adjust the value to control the spacing */
+}
