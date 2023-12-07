@@ -259,7 +259,7 @@ app.get('/get/businesses/', async (req, res) => {
 });
 
 
-app.use(express.static("/public_html"))
+app.use(express.static("public_html"))
 app.use('/img', express.static(__dirname + '/img'));
 
 // creating the dynamic website that takes information fromthe business form and creates a webpage in the given template
