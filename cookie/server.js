@@ -14,7 +14,6 @@ const db  = mongoose.connection;
 // const mongoDBURL =  'mongodb+srv://admin:ffucSFRiLP8txvNX@cluster0.l2iybs5.mongodb.net/?retryWrites=true&w=majority';
 const mongoDBURL = 'mongodb+srv://jasadelberg:HKjad473@cluster0.qr9yuh3.mongodb.net/';
 mongoose.connect(mongoDBURL, { useNewUrlParser: true })
-    const db = client.db('project0');
     const dataCollection = db.collection('Cluster0');
 
     // API endpoint to get data
