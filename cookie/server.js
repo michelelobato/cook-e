@@ -271,8 +271,8 @@ app.get('/api/data', (req, res) => {
         })
         .catch(error => console.error(error));
 });
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Buissness.html')); // Adjust the file name/path as necessary
+app.get('/Buissness.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Buissness.html'));
 });
 app.get('/BStyle.css', (req, res) => {
     res.sendFile(path.join(__dirname, 'BStyle.css')); // Adjust the file name/path as necessary
