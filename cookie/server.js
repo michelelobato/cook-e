@@ -218,46 +218,47 @@ app.post('/add/review', async (req, res) => {
   }
 });
 
-
 app.post('/business/create', async (req, res) => {
-
-  // Creates an account for the user
   try {
-    const { name, username, password } = req.body;
+    const {
+      name,
+      username,
+      password,
+      phone,
+      email,
+      address,
+      website,
+      restaurantTagline,
+      dishList1,
+      dishList2,
+      dishList3,
+      openingHours
+    } = req.body;
 
     const newBusiness = new Business({
       name: name,
       username: username,
-      password: password
+      password: password,
+      phone: phone,
+      email: email,
+      address: address,
+      website: website,
+      restaurantTagline: restaurantTagline,
+      dishList1: dishList1,
+      dishList2: dishList2,
+      dishList3: dishList3,
+      openingHours: openingHours
     });
-  
-    console.log(newBusiness);
-    
-    await newBusiness.save()
 
-          .then(() => {
-            res.end('SUCCESS');
-          })
-          .catch(() => {
-            res.end('DATABASE SAVE ISSUE');
-          });
-        }catch(error){
-console.error(error);
-res.status(500).json({error: 'server error'});
-        }
-        });
+    await newBusiness.save();
 
-app.get('/get/reviews/:business', async (req, res) => {
-//gets all the business's reviews
-    try {
-        const business = req.params.business;
-        const reviews = await Review.find({ business: business }).exec();
-        res.status(200).json(reviews);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
+    res.end('SUCCESS');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'server error' });
+  }
 });
+
 
 app.get('/get/businesses/', async (req, res) => {
   try {
