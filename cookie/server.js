@@ -16,6 +16,18 @@ const mongoDBURL = 'mongodb+srv://jasadelberg:HKjad473@cluster0.qr9yuh3.mongodb.
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
 db.on('error', () => { console.log('MongoDB connection error:') });
 
+async function connectToDatabase() {
+    try {
+        await client.connect();
+        const database = client.db('project0');
+        const dataCollection = database.collection('Cluster0');
+        return dataCollection;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
 //User schema
  var UserSchema = new mongoose.Schema({
     name: String,
